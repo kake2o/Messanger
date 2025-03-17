@@ -21,42 +21,81 @@ import com.example.almosttinder.ui.theme.AlmostTinderTheme
 
 @Composable
 fun StartScreen() {
+    val fontRobotoRegular = FontFamily(Font(resId = R.font.roboto_condensed_regular))
+    val fontRobotoSemiBold = FontFamily(Font(resId = R.font.roboto_condensed_semibold))
+
+    var textUsername = ""
+    var textPassword = ""
+
     Box(modifier = Modifier.fillMaxSize()) {
 
         Column(modifier = Modifier.align(Alignment.Center)) {
             Text(
-                "Sign in",
-                modifier = Modifier.padding(40.dp).align(Alignment.CenterHorizontally)
+                stringResource(id = R.string.greetingLogin),
+                fontFamily = fontRobotoSemiBold,
+                fontSize = 24.sp,
+                modifier = Modifier
+                    .padding(80.dp)
+                    .align(Alignment.CenterHorizontally)
             )
-
-            Text(
-                text = "Username",
-                textAlign = TextAlign.Center,
+            TextField(
+                value = textUsername,
+                onValueChange = { textUsername = it },
+                placeholder = {
+                    Text(
+                        text = stringResource(id = R.string.loginUsername),
+                        textAlign = TextAlign.Center,
+                        fontFamily = fontRobotoRegular,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    unfocusedContainerColor = MaterialTheme.colorScheme.background),
                 modifier = Modifier.padding(vertical = 20.dp)
+                    .align(Alignment.CenterHorizontally)
             )
-
-            Text(
-                text = "Password",
-                textAlign = TextAlign.Center
+            TextField(
+                value = textUsername,
+                onValueChange = { textUsername = it },
+                placeholder = {
+                    Text(
+                        text = stringResource(id = R.string.loginPassword),
+                        textAlign = TextAlign.Center,
+                        fontFamily = fontRobotoRegular,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    unfocusedContainerColor = MaterialTheme.colorScheme.background),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
             Spacer(modifier = Modifier.height(100.dp))
 
-            IconButton(
-                onClick = {TODO()},
-                modifier = Modifier.width(100.dp),
-                colors = IconButtonDefaults.iconButtonColors(MaterialTheme.colorScheme.primary)
+            Button(
+                onClick = { TODO() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 40.dp)
+
             ) {
-                Text("Login", textAlign = TextAlign.Center)
+                Text(
+                    stringResource(id = R.string.loginBtn),
+                    textAlign = TextAlign.Center,
+                    fontFamily = fontRobotoSemiBold,
+                    fontSize = 18.sp,
+                    color = colorResource(R.color.black)
+                )
             }
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewScreen() {
-    AlmostTinderTheme {
+    AlmostTinderTheme(dynamicColor = false) {
         StartScreen()
     }
 }
