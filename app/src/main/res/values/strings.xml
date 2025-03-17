@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AlmostTinder</string>
+    <string name="loginUsername">Username</string>
+    <string name="greetingLogin">Log in</string>
+    <string name="loginPassword">Password</string>
+    <string name="loginBtn">Login</string>
+</resources>
