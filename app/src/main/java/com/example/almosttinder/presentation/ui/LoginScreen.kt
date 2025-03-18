@@ -37,14 +37,11 @@ import androidx.navigation.NavController
 import com.example.almosttinder.R
 import com.example.almosttinder.presentation.LoginViewModel
 import com.example.almosttinder.presentation.navigation.navRoutes
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
+
 
 
 @Composable
 fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context: Context) {
-    val auth = Firebase.auth
     val fontRobotoRegular = FontFamily(Font(resId = R.font.roboto_condensed_regular))
     val fontRobotoSemiBold = FontFamily(Font(resId = R.font.roboto_condensed_semibold))
 

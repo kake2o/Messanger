@@ -2,7 +2,7 @@ package com.example.almosttinder.presentation.navigation
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.ViewModel
+
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
