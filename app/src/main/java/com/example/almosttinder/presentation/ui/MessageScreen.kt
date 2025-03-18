@@ -12,16 +12,13 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MessageScreen() {
+    val List = 
     LazyColumn(modifier = Modifier.fillMaxSize()
         .padding(20.dp)
         .clip(RoundedCornerShape(20.dp)
         )
     ) {
-        MessageCard()
+        items(List)
     }
 }
 
-@Composable
-fun MessageCard() {
-    Card() {  }
-}

@@ -23,10 +23,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.almosttinder.R
+import com.example.data.User
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(fs: Firebase) {
     val fontRobotoRegular = FontFamily(Font(resId = R.font.roboto_condensed_regular))
     val fontRobotoSemiBold = FontFamily(Font(resId = R.font.roboto_condensed_semibold))
 
@@ -80,7 +83,7 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(100.dp))
 
             Button(
-                onClick = { TODO() },
+                onClick = { fs.firestore.collection("data").document().set(User("Kaketo", "fjskdfjk"))},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 40.dp)

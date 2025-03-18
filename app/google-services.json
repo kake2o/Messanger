@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "331206242996",
+    "project_id": "messanger-fb627",
+    "storage_bucket": "messanger-fb627.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331206242996:android:7748592483b7a128061de1",
+        "android_client_info": {
+          "package_name": "com.example.almosttinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5Q4KC2C8aQlLBBPSkEAG4Obwotis2WrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
