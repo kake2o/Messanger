@@ -61,6 +61,7 @@ dependencies {
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.2")
+    implementation("com.google.firebase:firebase-auth:23.2.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
