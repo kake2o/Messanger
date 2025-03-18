@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,14 +46,16 @@ fun LoginScreen() {
     var textEmail by remember { mutableStateOf("") }
     var textPassword by remember { mutableStateOf("") }
 
-    Box(modifier = Modifier
-        .background(MaterialTheme.colorScheme.background)
-        .fillMaxSize()
+    Box(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .fillMaxSize()
     ) {
         Image(
-            painter = painterResource(R.drawable.background_splash),
+            painter = painterResource(R.drawable.splash),
             contentDescription = "",
-            modifier = Modifier.align(Alignment.TopEnd)
+            modifier = Modifier.align(alignment = Alignment.TopEnd)
+                .size(200.dp)
         )
         Column(modifier = Modifier.align(Alignment.Center)) {
             Text(
