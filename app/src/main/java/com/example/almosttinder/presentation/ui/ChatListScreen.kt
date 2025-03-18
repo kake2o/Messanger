@@ -25,21 +25,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.almosttinder.ui.theme.AlmostTinderTheme
+import androidx.navigation.NavController
+import com.example.almosttinder.presentation.navigation.navRoutes
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatListScreen() {
+fun ChatListScreen(navController: NavController) {
     val listItem = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Chats") },
                 navigationIcon = {
-                    IconButton(onClick = { Log.d("Click", "Click") }) {
+                    IconButton(onClick = { navController.navigate(navRoutes.PROFILE_SCREEN)}) {
                         Icon(
                             imageVector = Icons.Default.Person,
                             contentDescription = ""
@@ -71,13 +71,5 @@ fun ChatListScreen() {
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    AlmostTinderTheme {
-        ChatListScreen()
     }
 }

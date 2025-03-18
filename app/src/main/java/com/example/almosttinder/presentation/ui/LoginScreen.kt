@@ -1,6 +1,7 @@
 package com.example.almosttinder.presentation.ui
 
-import android.util.Log
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,14 +33,17 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.almosttinder.R
+import com.example.almosttinder.presentation.LoginViewModel
+import com.example.almosttinder.presentation.navigation.navRoutes
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context: Context) {
     val auth = Firebase.auth
     val fontRobotoRegular = FontFamily(Font(resId = R.font.roboto_condensed_regular))
     val fontRobotoSemiBold = FontFamily(Font(resId = R.font.roboto_condensed_semibold))
@@ -46,6 +51,7 @@ fun LoginScreen() {
     var textEmail by remember { mutableStateOf("") }
     var textPassword by remember { mutableStateOf("") }
 
+    val signUpResult = viewModel.signUpResult.collectAsState()
     Box(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
@@ -54,7 +60,8 @@ fun LoginScreen() {
         Image(
             painter = painterResource(R.drawable.splash),
             contentDescription = "",
-            modifier = Modifier.align(alignment = Alignment.TopEnd)
+            modifier = Modifier
+                .align(alignment = Alignment.TopEnd)
                 .size(200.dp)
         )
         Column(modifier = Modifier.align(Alignment.Center)) {
@@ -108,7 +115,15 @@ fun LoginScreen() {
 
             Button(
                 onClick = {
-                    signUp(auth, textEmail, textPassword)
+                    viewModel.signUp(textEmail, textPassword)
+                    signUpResult?.let { result ->
+                        if (result.value) {
+                            navController.navigate(navRoutes.CHATS_SCREEN)
+                        }
+                        else {
+                            Toast.makeText(context, "Failed to login", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -127,14 +142,3 @@ fun LoginScreen() {
     }
 }
 
-
-private fun signUp(auth: FirebaseAuth, email: String, password: String) {
-    auth.createUserWithEmailAndPassword(email, password)
-        .addOnCompleteListener {
-            if (it.isSuccessful) {
-                Log.d("SingUp", "Success")
-            } else {
-                Log.d("SingUp", "Failure")
-            }
-        }
-}
