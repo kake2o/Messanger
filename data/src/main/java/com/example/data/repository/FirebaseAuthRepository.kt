@@ -1,4 +1,4 @@
-package com.example.data.Repository
+package com.example.data.repository
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth

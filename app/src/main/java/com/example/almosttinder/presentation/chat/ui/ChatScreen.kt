@@ -1,4 +1,4 @@
-package com.example.almosttinder.presentation.ui
+package com.example.almosttinder.presentation.chat.ui
 
 import androidx.compose.runtime.Composable
 

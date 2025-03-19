@@ -1,4 +1,4 @@
-package com.example.almosttinder.presentation.ui
+package com.example.almosttinder.presentation.login.ui
 
 import android.content.Context
 import android.widget.Toast
@@ -35,9 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.almosttinder.R
-import com.example.almosttinder.presentation.LoginViewModel
+import com.example.almosttinder.presentation.login.LoginViewModel
 import com.example.almosttinder.presentation.navigation.navRoutes
-
 
 
 @Composable
@@ -87,6 +86,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                     unfocusedContainerColor = MaterialTheme.colorScheme.background,
                     focusedContainerColor = MaterialTheme.colorScheme.background
                 ),
+                singleLine = true,
                 modifier = Modifier
                     .padding(vertical = 20.dp)
                     .align(Alignment.CenterHorizontally)
@@ -106,6 +106,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                     unfocusedContainerColor = MaterialTheme.colorScheme.background,
                     focusedContainerColor = MaterialTheme.colorScheme.background
                 ),
+                singleLine = true,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 

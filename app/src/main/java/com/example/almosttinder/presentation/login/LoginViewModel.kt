@@ -1,4 +1,4 @@
-package com.example.almosttinder.presentation
+package com.example.almosttinder.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -6,11 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.almosttinder.presentation.LoginViewModel
-import com.example.almosttinder.presentation.ui.ChatListScreen
-import com.example.almosttinder.presentation.ui.ChatScreen
-import com.example.almosttinder.presentation.ui.LoginScreen
-import com.example.almosttinder.presentation.ui.ProfileScreen
+import com.example.almosttinder.presentation.login.LoginViewModel
+import com.example.almosttinder.presentation.chats.ui.ChatListScreen
+import com.example.almosttinder.presentation.chat.ui.ChatScreen
+import com.example.almosttinder.presentation.login.ui.LoginScreen
+import com.example.almosttinder.presentation.profile.ui.ProfileScreen
 
 @Composable
 fun NavHostController(navController: NavHostController, startDestination: String, context: Context, viewModel: LoginViewModel) {

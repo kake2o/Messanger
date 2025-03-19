@@ -1,4 +1,4 @@
-package com.example.almosttinder.presentation.ui
+package com.example.almosttinder.presentation.chats.ui
 
 
 import androidx.compose.foundation.background
