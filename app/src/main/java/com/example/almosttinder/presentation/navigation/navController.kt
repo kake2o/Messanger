@@ -22,7 +22,7 @@ fun NavHostController(navController: NavHostController, startDestination: String
             LoginScreen(navController = navController, context = context, viewModel = viewModel)
         }
         composable(route = navRoutes.PROFILE_SCREEN) {
-            ProfileScreen()
+            ProfileScreen(navController = navController, viewModel = viewModel, context = context)
         }
         composable(route = navRoutes.CHAT_SCREEN) {
             ChatScreen()

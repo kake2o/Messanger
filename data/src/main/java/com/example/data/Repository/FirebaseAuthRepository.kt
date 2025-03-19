@@ -25,4 +25,14 @@ class FirebaseAuthRepository(private val firebaseAuth: FirebaseAuth) : AuthRepos
             false
         }
     }
+
+    override suspend fun delete(email: String, password: String): Boolean {
+        return try {
+            firebaseAuth.currentUser?.delete()
+            true
+        } catch (e: Exception) {
+            Log.d("Repository", "$e Error")
+            false
+        }
+    }
 }

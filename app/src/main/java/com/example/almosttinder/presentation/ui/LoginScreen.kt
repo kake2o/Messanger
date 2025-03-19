@@ -126,7 +126,6 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 40.dp)
-
             ) {
                 Text(
                     stringResource(id = R.string.signUp),
@@ -136,6 +135,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                     color = colorResource(R.color.black)
                 )
             }
+
             Button(
                 onClick = {
                     viewModel.signIn(textEmail, textPassword)
@@ -150,7 +150,8 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 10.dp)
+                    .padding(horizontal = 40.dp)
+
 
             ) {
                 Text(
