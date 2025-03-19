@@ -4,4 +4,5 @@
     <string name="greetingLogin">Log in</string>
     <string name="loginPassword">Password</string>
     <string name="loginBtn">Login</string>
+    <string name="signUp">SignUp</string>
 </resources>

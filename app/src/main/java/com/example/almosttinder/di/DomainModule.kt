@@ -1,8 +1,9 @@
 package com.example.almosttinder.di
 
 
-import com.tinder.domain.AuthRepository
-import com.tinder.domain.SignUpUseCase
+import com.tinder.domain.repository.AuthRepository
+import com.tinder.domain.usecase.LoginInUseCase
+import com.tinder.domain.usecase.SignUpUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +16,10 @@ class DomainModule {
     @Provides
     fun provideSignUpUseCase(authRepository: AuthRepository): SignUpUseCase {
         return SignUpUseCase(authRepository = authRepository)
+    }
+
+    @Provides
+    fun provideLoginInUseCase(authRepository: AuthRepository) : LoginInUseCase {
+        return LoginInUseCase(authRepository = authRepository)
     }
 }

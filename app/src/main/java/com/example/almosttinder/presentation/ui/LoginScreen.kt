@@ -49,6 +49,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
     var textPassword by remember { mutableStateOf("") }
 
     val signUpResult = viewModel.signUpResult.collectAsState()
+    val signInResult = viewModel.signInResult.collectAsState()
     Box(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
@@ -118,13 +119,38 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                             navController.navigate(navRoutes.CHATS_SCREEN)
                         }
                         else {
-                            Toast.makeText(context, "Failed to login", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Failed to Sign Up", Toast.LENGTH_SHORT).show()
                         }
                     }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 40.dp)
+
+            ) {
+                Text(
+                    stringResource(id = R.string.signUp),
+                    textAlign = TextAlign.Center,
+                    fontFamily = fontRobotoSemiBold,
+                    fontSize = 18.sp,
+                    color = colorResource(R.color.black)
+                )
+            }
+            Button(
+                onClick = {
+                    viewModel.signIn(textEmail, textPassword)
+                    signInResult?.let { result ->
+                        if (result.value) {
+                            navController.navigate(navRoutes.CHATS_SCREEN)
+                        }
+                        else {
+                            Toast.makeText(context, "Failed to login", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp)
 
             ) {
                 Text(
@@ -135,6 +161,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                     color = colorResource(R.color.black)
                 )
             }
+
         }
     }
 }
