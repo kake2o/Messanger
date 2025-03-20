@@ -33,6 +33,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -48,6 +49,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.almosttinder.R
 import com.example.almosttinder.presentation.chats.ChatsViewModel
@@ -56,10 +59,9 @@ import com.example.almosttinder.presentation.navigation.navRoutes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatListScreen(navController: NavController) {
+fun ChatListScreen(navController: NavController, vm: ChatsViewModel = viewModel() ) {
 
-    val vm = ChatsViewModel()
-    val channels = vm.channels.collectAsState()
+    val channels by vm.channels.collectAsState()
 
     val fontRobotoRegular = FontFamily(Font(resId = R.font.roboto_condensed_regular))
     val fontRobotoSemiBold = FontFamily(Font(resId = R.font.roboto_condensed_semibold))
@@ -69,6 +71,8 @@ fun ChatListScreen(navController: NavController) {
 
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+
         topBar = {
             TopAppBar(
                 title = { Text("Chats") },
@@ -79,7 +83,10 @@ fun ChatListScreen(navController: NavController) {
                             contentDescription = ""
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
             )
         },
         floatingActionButton = {
@@ -97,13 +104,13 @@ fun ChatListScreen(navController: NavController) {
                 .padding(paddingValue)
                 .padding(horizontal = 20.dp)
         ) {
-            items(channels.value) { item ->
+            items(channels) { channel ->
                 Row(
                     modifier = Modifier
                         .padding(vertical = 10.dp)
                         .fillMaxWidth()
                         .wrapContentHeight()
-                        .clickable { TODO() }
+                        .clickable { navController.navigate("chat/${channel.id}") }
                 ) {
                     Box(
                         modifier = Modifier
@@ -114,7 +121,7 @@ fun ChatListScreen(navController: NavController) {
                             .padding(horizontal = 10.dp)
                     )
                     Text(
-                        text = item.name,
+                        text = channel.name,
                         maxLines = 2,
                         minLines = 1,
                         fontFamily = fontRobotoRegular,
