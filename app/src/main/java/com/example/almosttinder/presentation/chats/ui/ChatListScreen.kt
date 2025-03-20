@@ -161,7 +161,9 @@ fun ChatListScreen(navController: NavController) {
                         showDialog = false
                         if (text.isNotBlank()) {
                             vm.addChannel(text)
-                        }                    },
+                        }
+                        text = ""
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
                         contentColor = Color.White
@@ -172,7 +174,10 @@ fun ChatListScreen(navController: NavController) {
             },
             dismissButton = {
                 Button(
-                    onClick = { showDialog = false },
+                    onClick = {
+                        showDialog = false
+                        text = ""
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
                         contentColor = Color.White

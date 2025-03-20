@@ -3,9 +3,9 @@ package com.example.almosttinder.presentation.chats
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.data.models.Channel
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
-import com.example.data.models.Channel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
