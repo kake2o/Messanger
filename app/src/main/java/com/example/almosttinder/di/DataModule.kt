@@ -2,6 +2,7 @@ package com.example.almosttinder.di
 
 import com.example.data.repository.FirebaseAuthRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.tinder.domain.repository.AuthRepository
 import dagger.Module
 import dagger.Provides

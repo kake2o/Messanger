@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "331206242996",
+    "firebase_url": "https://messanger-fb627-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "messanger-fb627",
     "storage_bucket": "messanger-fb627.firebasestorage.app"
   },

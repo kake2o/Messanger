@@ -1,4 +1,4 @@
-package com.tinder.domain.module
+package com.example.data.models
 
 data class Channel(
     val id: String = "",
