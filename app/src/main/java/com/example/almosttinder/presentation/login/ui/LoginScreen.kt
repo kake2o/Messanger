@@ -51,7 +51,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
     val signInResult = viewModel.signInResult.collectAsState()
     Box(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.onPrimaryContainer)
             .fillMaxSize()
     ) {
         Image(
@@ -83,8 +83,8 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                     )
                 },
                 colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = MaterialTheme.colorScheme.background,
-                    focusedContainerColor = MaterialTheme.colorScheme.background
+                    unfocusedContainerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    focusedContainerColor = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 singleLine = true,
                 modifier = Modifier
@@ -103,8 +103,8 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
                     )
                 },
                 colors = TextFieldDefaults.colors(
-                    unfocusedContainerColor = MaterialTheme.colorScheme.background,
-                    focusedContainerColor = MaterialTheme.colorScheme.background
+                    unfocusedContainerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    focusedContainerColor = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 singleLine = true,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
