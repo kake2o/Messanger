@@ -22,18 +22,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.almosttinder.presentation.chats.ChatsViewModel
 import com.example.almosttinder.presentation.navigation.navRoutes
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatListScreen(navController: NavController) {
-    val listItem = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+    val vm = ChatsViewModel()
+    val channels = vm.channels.collectAsState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -55,7 +59,7 @@ fun ChatListScreen(navController: NavController) {
                 .padding(paddingValue)
                 .padding(horizontal = 20.dp)
         ) {
-            items(listItem) { item ->
+            items(channels.value) { item ->
                 Spacer(modifier = Modifier.height(10.dp))
                 Row {
                     Box(
@@ -67,7 +71,7 @@ fun ChatListScreen(navController: NavController) {
                     )
                     Spacer(modifier = Modifier.width(20.dp))
 
-                    Text(text = "HJSKFHJKSDHFKJHSDKFHDSJKHf")
+                    Text(text = "${item.name}")
                 }
             }
         }
