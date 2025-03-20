@@ -1,6 +1,6 @@
 package com.example.almosttinder.presentation.chat
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 import com.example.data.models.Message
 import com.google.firebase.Firebase
@@ -11,9 +11,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import java.util.UUID
 import javax.inject.Inject
 
@@ -30,7 +28,6 @@ class ChatViewModel @Inject constructor() : ViewModel() {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val list = mutableListOf<Message>()
-
                     snapshot.children.forEach { data ->
                         val message = data.getValue(Message::class.java)
                         message?.let {

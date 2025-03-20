@@ -115,11 +115,10 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
             Button(
                 onClick = {
                     viewModel.signUp(textEmail, textPassword)
-                    signUpResult?.let { result ->
+                    signUpResult.let { result ->
                         if (result.value) {
                             navController.navigate(navRoutes.CHATS_SCREEN)
-                        }
-                        else {
+                        } else {
                             Toast.makeText(context, "Failed to Sign Up", Toast.LENGTH_SHORT).show()
                         }
                     }
@@ -140,11 +139,10 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController, context
             Button(
                 onClick = {
                     viewModel.signIn(textEmail, textPassword)
-                    signInResult?.let { result ->
+                    signInResult.let { result ->
                         if (result.value) {
                             navController.navigate(navRoutes.CHATS_SCREEN)
-                        }
-                        else {
+                        } else {
                             Toast.makeText(context, "Failed to login", Toast.LENGTH_SHORT).show()
                         }
                     }
