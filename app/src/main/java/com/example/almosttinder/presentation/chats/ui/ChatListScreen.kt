@@ -49,7 +49,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.almosttinder.R
 import com.example.almosttinder.presentation.chats.ChatsViewModel
@@ -58,7 +57,7 @@ import com.example.almosttinder.presentation.navigation.navRoutes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatListScreen(navController: NavController, vm: ChatsViewModel = viewModel() ) {
+fun ChatListScreen(navController: NavController, vm: ChatsViewModel) {
 
     val channels by vm.channels.collectAsState()
 

@@ -3,58 +3,29 @@ package com.example.almosttinder.presentation.chat
 
 import androidx.lifecycle.ViewModel
 import com.example.data.models.Message
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
+import com.example.data.repository.MessagesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.util.UUID
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatViewModel @Inject constructor() : ViewModel() {
+class ChatViewModel @Inject constructor(
+    private val messagesRepository: MessagesRepository
+) : ViewModel() {
 
     private val _messages = MutableStateFlow<List<Message>>(emptyList())
     val messages = _messages.asStateFlow()
 
-    private val firebaseDatabase = Firebase.database
 
     fun listenForMessages(channelID: String) {
-        firebaseDatabase.getReference("messages").child(channelID).orderByChild("createdAt")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val list = mutableListOf<Message>()
-                    snapshot.children.forEach { data ->
-                        val message = data.getValue(Message::class.java)
-                        message?.let {
-                            list.add(it)
-                        }
-                        _messages.value = list
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
+        messagesRepository.listenForMessages(channelID = channelID) { updatedMessage ->
+            _messages.update { updatedMessage }
+        }
     }
 
     fun sendMessage(channelID: String, messageText: String) {
-        val message = Message(
-            id = firebaseDatabase.reference.key ?: UUID.randomUUID().toString(),
-            senderId = Firebase.auth.currentUser?.uid ?: "",
-            message = messageText,
-            senderName = Firebase.auth.currentUser?.displayName ?: "",
-            senderImage = null,
-            imageUrl = null
-        )
-        val key =
-            firebaseDatabase.getReference("messages").child(channelID).push().setValue(message)
-
+        messagesRepository.sendMessage(channelID, messageText)
     }
 }

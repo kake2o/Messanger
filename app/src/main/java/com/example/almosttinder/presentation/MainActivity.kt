@@ -8,23 +8,26 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.compose.rememberNavController
+import com.example.almosttinder.presentation.chat.ChatViewModel
+import com.example.almosttinder.presentation.chats.ChatsViewModel
 import com.example.almosttinder.presentation.login.LoginViewModel
 import com.example.almosttinder.presentation.navigation.NavHostController
 import com.example.almosttinder.presentation.navigation.navRoutes
 import com.example.almosttinder.ui.theme.AlmostTinderTheme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.database
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     private lateinit var auth: FirebaseAuth
-    private val vm: LoginViewModel by viewModels()
+
+    private val vmLogin: LoginViewModel by viewModels()
+    private val vmChats: ChatsViewModel by viewModels()
+    private val vmChat: ChatViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
-            val isUserLoggedIn by vm.isUserLoggedIn.collectAsState()
+            val isUserLoggedIn by vmLogin.isUserLoggedIn.collectAsState()
 
             val navController = rememberNavController()
             AlmostTinderTheme(dynamicColor = false) {
@@ -40,7 +43,9 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     startDestination = if (isUserLoggedIn) navRoutes.CHATS_SCREEN else navRoutes.LOGIN_SCREEN,
                     context = applicationContext,
-                    viewModel = vm
+                    viewModelLogin = vmLogin,
+                    viewModelChats = vmChats,
+                    viewModelChat = vmChat
                 )
             }
         }

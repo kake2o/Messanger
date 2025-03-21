@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -36,7 +37,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.almosttinder.presentation.chat.ChatViewModel
 import com.example.almosttinder.ui.theme.ReceiverMessage
@@ -47,14 +47,22 @@ import com.google.firebase.auth.auth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreen(navController: NavController, channelId: String, vm: ChatViewModel = viewModel()) {
+fun ChatScreen(navController: NavController, channelId: String, vm: ChatViewModel) {
+
+    val listState = rememberLazyListState()
+
+    val messages by vm.messages.collectAsState()
+    var messageText by remember { mutableStateOf("") }
 
     LaunchedEffect(key1 = true) {
         vm.listenForMessages(channelId)
     }
 
-    val messages by vm.messages.collectAsState()
-    var messageText by remember { mutableStateOf("") }
+    LaunchedEffect(messages) {
+        if (messages.isNotEmpty()) {
+            listState.animateScrollToItem(messages.size - 1)
+        }
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -76,7 +84,7 @@ fun ChatScreen(navController: NavController, channelId: String, vm: ChatViewMode
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.onPrimaryContainer) // Фон строки ввода
+                    .background(MaterialTheme.colorScheme.onPrimaryContainer)
                     .padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -108,6 +116,7 @@ fun ChatScreen(navController: NavController, channelId: String, vm: ChatViewMode
         }
     ) { paddingValues ->
         LazyColumn(
+            state = listState,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
