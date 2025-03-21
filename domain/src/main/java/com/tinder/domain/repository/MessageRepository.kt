@@ -1,8 +1,8 @@
-package com.example.data.interfaces
+package com.tinder.domain.repository
 
-import com.example.data.models.Message
+import com.tinder.domain.models.Message
 
-interface IMessageRepository {
+interface MessageRepository {
     fun listenForMessages(channelID: String, onMessagesUpdated: (List<Message>) -> Unit)
     fun sendMessage(channelID: String, messageText: String)
 }

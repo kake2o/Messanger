@@ -2,8 +2,10 @@ package com.example.almosttinder.di
 
 
 import com.tinder.domain.repository.AuthRepository
+import com.tinder.domain.repository.MessageRepository
 import com.tinder.domain.usecase.DeleteUseCase
 import com.tinder.domain.usecase.LoginInUseCase
+import com.tinder.domain.usecase.SendMessageUseCase
 import com.tinder.domain.usecase.SignUpUseCase
 import dagger.Module
 import dagger.Provides
@@ -27,5 +29,10 @@ class DomainModule {
     @Provides
     fun provideDeleteUseCase(authRepository: AuthRepository) : DeleteUseCase {
         return DeleteUseCase(authRepository = authRepository)
+    }
+
+    @Provides
+    fun provideSendMessageUseCase(messageRepository: MessageRepository) : SendMessageUseCase{
+        return SendMessageUseCase(messageRepository = messageRepository)
     }
 }

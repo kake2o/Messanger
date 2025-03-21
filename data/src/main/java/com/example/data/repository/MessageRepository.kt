@@ -1,7 +1,5 @@
 package com.example.data.repository
 
-import com.example.data.interfaces.IMessageRepository
-import com.example.data.models.Message
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -9,10 +7,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.tinder.domain.models.Message
+import com.tinder.domain.repository.MessageRepository
 import java.util.UUID
 import javax.inject.Inject
 
-class MessagesRepository @Inject constructor(private val database: FirebaseDatabase, private val auth: FirebaseAuth) : IMessageRepository {
+class MessagesRepository @Inject constructor(private val database: FirebaseDatabase, private val auth: FirebaseAuth) : MessageRepository {
 
     override fun listenForMessages(channelID: String, onMessagesUpdated: (List<Message>) -> Unit) {
         database.getReference("messages")
@@ -25,7 +25,6 @@ class MessagesRepository @Inject constructor(private val database: FirebaseDatab
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
     }
@@ -41,7 +40,6 @@ class MessagesRepository @Inject constructor(private val database: FirebaseDatab
         )
         val key =
             database.getReference("messages").child(channelID).push().setValue(message)
-
     }
 
 

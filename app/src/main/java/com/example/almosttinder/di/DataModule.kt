@@ -1,13 +1,13 @@
 package com.example.almosttinder.di
 
 import com.example.data.interfaces.IChannelRepository
-import com.example.data.interfaces.IMessageRepository
 import com.example.data.repository.ChannelRepository
 import com.example.data.repository.FirebaseAuthRepository
 import com.example.data.repository.MessagesRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.tinder.domain.repository.AuthRepository
+import com.tinder.domain.repository.MessageRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,7 +48,7 @@ class DataModule {
     fun provideMessageRepository(
         firebaseDatabase: FirebaseDatabase,
         firebaseAuth: FirebaseAuth
-    ): IMessageRepository {
+    ): MessageRepository {
         return MessagesRepository(firebaseDatabase, firebaseAuth)
     }
 }
